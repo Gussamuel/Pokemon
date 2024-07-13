@@ -17,23 +17,20 @@ def get_var_value(filename="varstore.dat"):
         f.seek(0)
         f.truncate()
         f.write(str(val))
+        
+        # Check if the reset count is a multiple of 20
+        if val % 100 == 0:
+            sendText(val)  # Send a text message
+            
         return val
 
-def get_var_valueShiny(filename="varstoreShiny.dat"):
-    with open(filename, "a+") as f:
-        f.seek(0)
-        val = int(f.read() or 0) + 1
-        f.seek(0)
-        f.truncate()
-        f.write(str(val))
-        return val
+def sendText(reset_count):
+    imessage.send(['+1 6155172055'], f'Hunt ongoing...reset count: {reset_count}')
 
-def sendText():
-    time.sleep(1)
-    imessage.send(['+1 6155172055'], 'Shiny found!')
+def shinyText(reset_count):
+    imessage.send(['+1 6155172055'], f'Shiny found! Reset count: {reset_count}')
 
 def shinyDetermined():
-    time.sleep(0.5)
     rgbShiny2 = (66, 210, 82, 255)
     
     # Take a screenshot
@@ -50,16 +47,7 @@ def shinyDetermined():
     print("Screen size:", screen)
     print("Captured RGB value at ({}, {}): {}".format(x, y, rgb))
     print("\n")
-    
-    # Draw a marker on the image to indicate the pixel being checked
-    # draw = ImageDraw.Draw(screenshot)
-    # marker_size = 5
-    # draw.rectangle([x-marker_size, y-marker_size, x+marker_size, y+marker_size], outline="red", width=3)
-    
-    # Save the screenshot to a file to visually inspect it
-    # screenshot.save("screenshot_with_marker.png")
-    
-    time.sleep(1)
+ 
     if rgb == rgbShiny2:  # Compare only the RGB values, ignoring alpha
         print(" {} resets.".format(get_var_value()))
         print("\n")
@@ -70,8 +58,8 @@ def shinyDetermined():
         print("\n")
         print("You got yourself a shiny!")
         print(" {} resets.".format(get_var_value()))
-        print(" {} shiny pokemon.".format(get_var_valueShiny()))
-        sendText()
+        print(" {} shiny pokemon.".format(get_var_value()))
+        shinyText(get_var_value())  # Send shiny found text with current reset count
         exit()
 
 def bigLoop():
@@ -110,7 +98,7 @@ def bigLoop():
             if count == 7:
                 print('PHASE 2 DONE AT 7')
 
-        for i in range(3):
+        for i in range(2):
             time.sleep(0.5)
             pyautogui.keyDown('up')
             time.sleep(0.4)
@@ -119,9 +107,9 @@ def bigLoop():
             count = count + 1
             print(count, 'up')
             if count == 10:
-                print('PHASE 3 DONE AT 10')
+                print('PHASE 3 DONE AT 9')
 
-        time.sleep(3)
+        time.sleep(3.5)
         print("Calling shiny determined...")
         shinyDetermined()
 
