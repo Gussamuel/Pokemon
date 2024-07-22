@@ -31,14 +31,14 @@ def shinyText(reset_count):
     imessage.send(['+1 6155172055'], f'Shiny found! Reset count: {reset_count}')
 
 def shinyDetermined():
-    time.sleep(0.5)
-    rgbShiny2 = (66, 210, 82, 255)
+    time.sleep(4)
+    rgbShiny2 = (255, 130, 74, 255)
     
     # Take a screenshot
     screenshot = ImageGrab.grab()
     
     # Coordinates to check
-    x, y = 1686, 364  # Update these coordinates if necessary
+    x, y = 1524, 432  # Update these coordinates if necessary
     
     # Get the pixel value at the specified coordinates
     rgb = screenshot.load()[x, y]
@@ -98,16 +98,16 @@ def bigLoop():
             if count == 7:
                 print('PHASE 2 DONE AT 7')
 
-        for i in range(4):
+        for i in range(3):
             time.sleep(0.5)
-            pyautogui.keyDown('up')
-            time.sleep(0.4)
-            pyautogui.keyUp('up')
-            time.sleep(0.4)
+            keyboard.press('x')
+            time.sleep(0.5)
+            keyboard.release('x')
+            time.sleep(0.5)
             count = count + 1
-            print(count, 'up')
-            if count == 11:
-                print('PHASE 3 DONE AT 11')
+            print(count, 'x')
+            if count == 10:
+                print('PHASE 3 DONE AT 10')
 
         print("Calling shiny determined now!")
         shinyDetermined()
