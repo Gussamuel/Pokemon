@@ -19,8 +19,8 @@ def get_var_value(filename="varstore.dat"):
         f.write(str(val))
         
         # Check if the reset count is a multiple of 20
-        #if val % 100 == 0:
-        #    sendText(val)  # Send a text message
+        if val % 100 == 0:
+            sendText(val)  # Send a text message
             
         return val
 
@@ -31,7 +31,7 @@ def shinyText(reset_count):
     imessage.send(['+1 6155172055'], f'Shiny found! Reset count: {reset_count}')
 
 def shinyDetermined():
-    time.sleep(1.5)
+    time.sleep(2)
     rgbShiny2 = (255, 235, 0, 255)
     
     # Take a screenshot
@@ -59,7 +59,7 @@ def shinyDetermined():
         print("\n")
         print("You got yourself a shiny!")
         print(" {} resets.".format(get_var_value()))
-        #shinyText(get_var_value())  # Send shiny found text with current reset count
+        shinyText(get_var_value())  # Send shiny found text with current reset count
         exit()
 
 def bigLoop():
@@ -78,15 +78,15 @@ def bigLoop():
         pyautogui.keyUp('z')
         time.sleep(0.5)
 
-        for i in range(6):
+        for i in range(7):
             keyboard.press('x')
             time.sleep(0.5)
             keyboard.release('x')
             time.sleep(0.5)
             count = count + 1
             print(count, 'x')
-            if count == 6:
-                print('PHASE 1 DONE AT 6')
+            if count == 7:
+                print('PHASE 1 DONE AT 7')
 
         for i in range(1):
             keyboard.press('z')
@@ -95,8 +95,8 @@ def bigLoop():
             time.sleep(0.5)
             count = count + 1
             print(count, 'z')
-            if count == 7:
-                print('PHASE 2 DONE AT 7')
+            if count == 8:
+                print('PHASE 2 DONE AT 8')
 
         for i in range(3):
             time.sleep(0.5)
@@ -106,8 +106,8 @@ def bigLoop():
             time.sleep(0.5)
             count = count + 1
             print(count, 'x')
-            if count == 10:
-                print('PHASE 3 DONE AT 10')
+            if count == 11:
+                print('PHASE 3 DONE AT 11')
 
         print("Calling shiny determined now!")
         shinyDetermined()
