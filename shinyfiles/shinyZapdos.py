@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageGrab
 import imessage
 import sys
 
-sys.setrecursionlimit(6000)
+sys.setrecursionlimit(10000)
 
 keyboard = Controller()
 
