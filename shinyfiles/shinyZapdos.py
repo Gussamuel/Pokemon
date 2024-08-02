@@ -78,15 +78,15 @@ def bigLoop():
         pyautogui.keyUp('z')
         time.sleep(0.5)
 
-        for i in range(7):
+        for i in range(8):
             keyboard.press('x')
             time.sleep(0.5)
             keyboard.release('x')
             time.sleep(0.5)
             count = count + 1
             print(count, 'x')
-            if count == 7:
-                print('PHASE 1 DONE AT 7')
+            if count == 8:
+                print('PHASE 1 DONE AT 8')
 
         for i in range(1):
             keyboard.press('z')
@@ -95,8 +95,8 @@ def bigLoop():
             time.sleep(0.5)
             count = count + 1
             print(count, 'z')
-            if count == 8:
-                print('PHASE 2 DONE AT 8')
+            if count == 9:
+                print('PHASE 2 DONE AT 9')
 
         for i in range(3):
             time.sleep(0.5)
@@ -106,8 +106,8 @@ def bigLoop():
             time.sleep(0.5)
             count = count + 1
             print(count, 'x')
-            if count == 11:
-                print('PHASE 3 DONE AT 11')
+            if count == 12:
+                print('PHASE 3 DONE AT 12')
 
         print("Calling shiny determined now!")
         shinyDetermined()
