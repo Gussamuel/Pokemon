@@ -33,6 +33,7 @@ def shinyText(reset_count):
 def shinyDetermined():
     time.sleep(2)
     rgbShiny2 = (255, 235, 0, 255)
+    rgbShiny = (255, 194, 0, 255)
     
     # Take a screenshot
     screenshot = ImageGrab.grab()
@@ -54,7 +55,7 @@ def shinyDetermined():
         print("\n")
         print('Not a shiny.')
         bigLoop()
-    else:
+    elif rgb == rgbShiny:
         print(" {} resets.".format(get_var_value()))
         print("\n")
         print("You got yourself a shiny!")
