@@ -62,6 +62,20 @@ def shinyDetermined():
         print(" {} resets.".format(get_var_value()))
         shinyText(get_var_value())  # Send shiny found text with current reset count
         exit()
+    else:
+        print(" {} resets.".format(get_var_value()))
+        print("\n")
+        print('I think there was an error here. I will screenshot it for you!')
+
+        # Define the path for saving the screenshot to the desktop
+        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+        screenshot_path = os.path.join(desktop_path, "error_screenshot.png")
+
+        # Save the screenshot to the desktop
+        screenshot.save(screenshot_path)
+        print(f"Screenshot saved to {screenshot_path}")
+
+        bigLoop()
 
 def bigLoop():
     while True:
