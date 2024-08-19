@@ -2,7 +2,7 @@ import time
 import os
 from pynput.keyboard import Key, Controller
 import pyautogui
-from PIL import Image, ImageDraw, ImageGrab
+from PIL import ImageGrab
 import imessage
 import sys
 
@@ -44,43 +44,36 @@ def shinyDetermined():
     # Get the pixel value at the specified coordinates
     rgb = screenshot.load()[x, y]
     
-    # Print the screen size and the captured RGB value
-    screen = screenshot.size
-    print("Screen size:", screen)
-    print("Captured RGB value at ({}, {}): {}".format(x, y, rgb))
-    print("\n")
- 
-    if rgb == rgbShiny2:  # Compare only the RGB values, ignoring alpha
-        print(" {} resets.".format(get_var_value()))
-        print("\n")
-        print('Not a shiny.')
-        bigLoop()
+    print(f"\nCaptured RGB value at ({x}, {y}): {rgb}")
+
+    # After retrieving the RGB value, delete the screenshot to free memory
+    del screenshot
+
+    # Check for shiny
+    if rgb == rgbShiny2:
+        print(f"\n{get_var_value()} RESETS. NOT SHINY.")
     elif rgb == rgbShiny:
-        print(" {} resets.".format(get_var_value()))
-        print("\n")
-        print("You got yourself a shiny!")
-        print(" {} resets.".format(get_var_value()))
-        shinyText(get_var_value())  # Send shiny found text with current reset count
+        print(f"\n{get_var_value()} RESETS. */*/*/* SHINY */*/*/*\n")
+        shinyText(get_var_value())  # Send shiny found text
         exit()
     else:
-        print(" {} resets.".format(get_var_value()))
-        print("\n")
-        print('I think there was an error here. I will screenshot it for you!')
+        print(f"\n{get_var_value()} RESETS. ?????????? ERROR, SCREENSHOT TAKEN AND STORED TO DESKTOP ??????????\n")
 
-        # Define the path for saving the screenshot to the desktop
+        # Take a new screenshot for saving the error
+        screenshot = ImageGrab.grab()
         desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
         screenshot_path = os.path.join(desktop_path, "error_screenshot.png")
-
-        # Save the screenshot to the desktop
         screenshot.save(screenshot_path)
-        print(f"Screenshot saved to {screenshot_path}")
+        print(f"SCREENSHOT SAVED TO: {screenshot_path}")
 
-        bigLoop()
+        # Explicitly delete the screenshot after saving
+        del screenshot
 
 def bigLoop():
     while True:
         count = 0
         os.system("open /Applications/Playback.app")
+        print('\n********** RESET **********\n')
         time.sleep(0.5)
         pyautogui.keyDown('return')
         pyautogui.keyDown('backspace')
@@ -93,26 +86,29 @@ def bigLoop():
         pyautogui.keyUp('z')
         time.sleep(0.5)
 
-        for i in range(8):
+        print('\n---------- START PHASE 1 ----------\n')
+        for i in range(5):
             keyboard.press('x')
-            time.sleep(0.5)
+            time.sleep(0.8)
             keyboard.release('x')
-            time.sleep(0.5)
+            time.sleep(0.8)
             count = count + 1
             print(count, 'x')
-            if count == 8:
-                print('PHASE 1 DONE AT 8')
+            if count == 5:
+                print('\n---------- END PHASE 1 ----------\n')
 
+        print('\n---------- START PHASE 2 ----------\n')
         for i in range(1):
             keyboard.press('z')
-            time.sleep(0.5)
+            time.sleep(0.8)
             keyboard.release('z')
-            time.sleep(0.5)
+            time.sleep(0.8)
             count = count + 1
             print(count, 'z')
-            if count == 9:
-                print('PHASE 2 DONE AT 9')
+            if count == 6:
+                print('\n---------- END PHASE 2----------\n')
 
+        print('\n---------- START PHASE 3 ----------\n')
         for i in range(3):
             time.sleep(0.5)
             keyboard.press('x')
@@ -121,10 +117,11 @@ def bigLoop():
             time.sleep(0.5)
             count = count + 1
             print(count, 'x')
-            if count == 12:
-                print('PHASE 3 DONE AT 12')
+            if count == 9:
+                print('\n---------- END PHASE 3 ----------\n')
 
-        print("Calling shiny determined now!")
+        print("\n########## CALLING FUNCTION ##########")
         shinyDetermined()
 
+# Run the main loop
 bigLoop()
