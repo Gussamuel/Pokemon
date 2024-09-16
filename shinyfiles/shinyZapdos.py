@@ -31,7 +31,7 @@ def shinyText(reset_count):
     imessage.send(['+1 6155172055'], f'Shiny found! Reset count: {reset_count}')
 
 def shinyDetermined():
-    time.sleep(2)
+    time.sleep(3)
     rgbShiny2 = (255, 235, 0, 255)
     rgbShiny = (255, 194, 0, 255)
     
@@ -52,22 +52,22 @@ def shinyDetermined():
     # Check for shiny
     if rgb == rgbShiny2:
         print(f"\n{get_var_value()} RESETS. NOT SHINY.")
-    elif rgb == rgbShiny:
+    else:
         print(f"\n{get_var_value()} RESETS. */*/*/* SHINY */*/*/*\n")
         shinyText(get_var_value())  # Send shiny found text
         exit()
-    else:
-        print(f"\n{get_var_value()} RESETS. ?????????? ERROR, SCREENSHOT TAKEN AND STORED TO DESKTOP ??????????\n")
+    #else:
+    #    print(f"\n{get_var_value()} RESETS. ?????????? ERROR, SCREENSHOT TAKEN AND STORED TO DESKTOP ??????????\n")
 
         # Take a new screenshot for saving the error
-        screenshot = ImageGrab.grab()
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-        screenshot_path = os.path.join(desktop_path, "error_screenshot.png")
-        screenshot.save(screenshot_path)
-        print(f"SCREENSHOT SAVED TO: {screenshot_path}")
+    #    screenshot = ImageGrab.grab()
+    #    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+    #    screenshot_path = os.path.join(desktop_path, "error_screenshot.png")
+    #    screenshot.save(screenshot_path)
+    #    print(f"SCREENSHOT SAVED TO: {screenshot_path}")
 
         # Explicitly delete the screenshot after saving
-        del screenshot
+    #    del screenshot
 
 def bigLoop():
     while True:
